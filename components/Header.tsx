@@ -1,18 +1,29 @@
 import Image from "next/image";
 import SearchBox from "./Searchbox";
 import Link from "next/link";
+import { FC } from "react";
+import { type } from "os";
 
-const Header = ({ isSearch, valueText }) => {
+interface HeaderProps {
+  isSearch: boolean;
+  valueText: string | string[];
+}
+
+const Header: FC<HeaderProps> = ({ isSearch, valueText }) => {
   return (
     <div>
-      <div className=" h-12 w-full flex justify-evenly items-center mt-2 ml-4">
+      <div className="h-12 w-full flex justify-evenly items-center mt-2 ml-4">
         <div>
           <Link href={"/"}>
             <Image src={"/images/logo.png"} height={54} width={54} />
           </Link>
         </div>
         <div className="w-full flex-1 ml-8 mr-16">
-          {isSearch && <SearchBox valueText={valueText} />}
+          {isSearch && (
+            <div className="w-[600px]">
+              <SearchBox valueText={valueText} />
+            </div>
+          )}
         </div>
         <div className="flex justify-around text-sm items-center mr-6 space-x-4">
           <h1 className="hover:underline cursor-pointer">Github</h1>

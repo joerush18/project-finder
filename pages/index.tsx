@@ -15,7 +15,7 @@ export default function Home() {
         <Header isSearch={false} valueText={""} />
         {/* logo */}
         <div className="flex justify-center mt-8">
-          <Image src={"/images/logosecondary.png"} height={105} width={434} />
+          <Image src="/images/logosecondary.png" height={105} width={434} />
         </div>
         {/* Searching places */}
         <div className="w-[500px] m-auto">
