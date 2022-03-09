@@ -10,22 +10,18 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Project Finder
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Badges
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+![MIT License](https://img.shields.io/github/issues/joerush18/project-finder)
+![GPLv3 License](https://img.shields.io/github/forks/joerush18/project-finder)
+![AGPL License](https://img.shields.io/github/stars/joerush18/project-finder)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Screenshots
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+![App Screenshot](sampleimh1.png)
+![App Screenshot](sampleimg2.png)
 
 ## Deploy on Vercel
 

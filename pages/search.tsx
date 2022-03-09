@@ -38,7 +38,7 @@ const Search: FC = () => {
       try {
         if (query) {
           const { data } = await axios.get(
-            `https://api.github.com/search/repositories?q=${query}&sort=star&per_page=5&page=1`
+            `https://api.github.com/search/repositories?q=${query}&sort=star&per_page=10&page=1`
           );
           const finalResult = data.items.map((item: any, index: number) => {
             return mapResult(item);
