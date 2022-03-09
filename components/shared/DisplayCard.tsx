@@ -18,7 +18,7 @@ const DisplayCard: FC<CardProps> = ({ result }) => {
   } = result;
   return (
     <div>
-      <Link href={repoLink}>
+      <Link href={repoLink} passHref>
         <div className="shadow-sm border-2 rounded-lg p-4  hover:shadow-md">
           <div className="flex items-center space-x-2">
             <img
@@ -27,7 +27,7 @@ const DisplayCard: FC<CardProps> = ({ result }) => {
               className="h-14 rounded-full"
             />
             <div>
-              <a href={author.authorProfile} target="_blank">
+              <a href={author.authorProfile} target="_blank" rel="noreferrer">
                 <h1 className="font-bold text-sm cursor-pointer  hover:underline opacity-50">
                   {author.authorUname}
                 </h1>

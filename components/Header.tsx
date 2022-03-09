@@ -14,7 +14,7 @@ const Header: FC<HeaderProps> = ({ isSearch, valueText }) => {
     <div>
       <div className="h-12 w-full flex justify-evenly items-center mt-2 ml-4">
         <div>
-          <Link href={"/"}>
+          <Link href={"/"} passHref>
             <Image src={"/images/logo.png"} height={54} width={54} />
           </Link>
         </div>
