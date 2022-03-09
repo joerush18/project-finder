@@ -12,7 +12,9 @@ export default function Home() {
       </Head>
       <main>
         {/* Heaader */}
-        <Header isSearch={false} />
+        <div className="mx-4 mt-2">
+          <Header isSearch={false} />
+        </div>
         <div className="flex justify-center items-baseline mt-6">
           <h1 className="text-sm text-pink-500 cursor-pointer font-bold">
             “The secret of getting ahead is getting started”

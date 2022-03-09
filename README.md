@@ -20,8 +20,9 @@ yarn dev
 
 ## Screenshots
 
-![App Screenshot](sampleimh1.png)
+![App Screenshot](sampleimg1.png)
 ![App Screenshot](sampleimg2.png)
+![App Screenshot](sampleimg3.png)
 
 ## Deploy on Vercel
 

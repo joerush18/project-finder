@@ -7,10 +7,7 @@ import axios from "axios";
 import Footer from "../components/Footer";
 import { ResultsInterface } from "../interfaces/interfaces";
 import ClipLoader from "react-spinners/ClipLoader";
-import {
-  ExclamationCircleIcon,
-  ArrowCircleRightIcon,
-} from "@heroicons/react/solid";
+import { ExclamationCircleIcon } from "@heroicons/react/solid";
 
 type ResultsType = [ResultsInterface];
 
@@ -87,16 +84,18 @@ const Search: FC = () => {
       </Head>
       <main>
         {/* Header */}
-        <Header isSearch={true} valueText={query} />
-        <div className="border-b-2 mt-2"></div>
-        <div className="mt-2 flex justify-start mx-24">
-          <h1 className="font-bold">
-            <span className="text-sm text-pink-500 font-bold mr-2">
-              Search results for :
-            </span>
-            {query}({pageCounter})
-          </h1>
+        <div className="sticky top-0 z-40 bg-white left-0 right-0">
+          <Header isSearch={true} valueText={query} />
+          <div className="mt-2 flex justify-start mx-24 pb-2  ">
+            <h1 className="font-bold">
+              <span className="text-md text-pink-500 font-bold mr-2">
+                Search results for :-
+              </span>
+              {query}({pageCounter})
+            </h1>
+          </div>
         </div>
+
         {/* Github repos main card detail. */}
         {load ? (
           <div className="flex justify-center mt-8">
@@ -117,7 +116,7 @@ const Search: FC = () => {
                 onClick={onPreviousPageHandler}
                 className="text-md font-bold  cursor-pointer hover:underline text-pink-500 "
               >
-                Previous
+                ({pageCounter - 1}) Previous
               </h1>
             )}
 
@@ -125,7 +124,7 @@ const Search: FC = () => {
               onClick={onNextPageHandler}
               className="text-md font-bold  cursor-pointer hover:underline text-purple-500 "
             >
-              Next
+              Next ({pageCounter + 1})
             </h1>
           </div>
         )}

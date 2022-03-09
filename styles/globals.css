@@ -3,3 +3,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html,
+  main,
+  body {
+    @apply m-0 p-0;
+  }
+}
