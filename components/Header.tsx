@@ -2,11 +2,10 @@ import Image from "next/image";
 import SearchBox from "./Searchbox";
 import Link from "next/link";
 import { FC } from "react";
-import { type } from "os";
 
 interface HeaderProps {
   isSearch: boolean;
-  valueText: string | string[];
+  valueText?: string | string[];
 }
 
 const Header: FC<HeaderProps> = ({ isSearch, valueText }) => {

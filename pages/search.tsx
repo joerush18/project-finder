@@ -6,6 +6,11 @@ import DisplayCard from "../components/shared/DisplayCard";
 import axios from "axios";
 import Footer from "../components/Footer";
 import { ResultsInterface } from "../interfaces/interfaces";
+import ClipLoader from "react-spinners/ClipLoader";
+import {
+  ExclamationCircleIcon,
+  ArrowCircleRightIcon,
+} from "@heroicons/react/solid";
 
 type ResultsType = [ResultsInterface];
 
@@ -32,24 +37,47 @@ const Search: FC = () => {
   const router = useRouter();
   const { query } = router.query;
   const [results, setResults] = useState<ResultsType | []>([]);
+  const [load, setLoad] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>("");
+  const [pageCounter, setPageCounter] = useState<number>(1);
+
+  const fetchItems = async () => {
+    setLoad(true);
+    setError(false);
+    try {
+      if (query) {
+        const { data } = await axios.get(
+          `https://api.github.com/search/repositories?q=${query}&sort=star&per_page=5&page=${pageCounter}`
+        );
+        const finalResult = data.items.map((item: any, index: number) => {
+          return mapResult(item);
+        });
+        setResults(finalResult);
+        setLoad(false);
+      }
+    } catch (error) {
+      setLoad(false);
+      setError(true);
+      setErrorMessage(error.message);
+    }
+  };
+
+  const onNextPageHandler = async (e) => {
+    e.preventDefault();
+    fetchItems();
+    setPageCounter(pageCounter + 1);
+  };
+
+  const onPreviousPageHandler = async (e) => {
+    e.preventDefault();
+    fetchItems();
+    setPageCounter(pageCounter - 1);
+  };
 
   useEffect(() => {
-    const fetchResults = async () => {
-      try {
-        if (query) {
-          const { data } = await axios.get(
-            `https://api.github.com/search/repositories?q=${query}&sort=star&per_page=10&page=1`
-          );
-          const finalResult = data.items.map((item: any, index: number) => {
-            return mapResult(item);
-          });
-          setResults(finalResult);
-        }
-      } catch (error) {
-        console.log("Error.");
-      }
-    };
-    fetchResults();
+    fetchItems();
+    setPageCounter(1);
   }, [query]);
 
   return (
@@ -61,18 +89,57 @@ const Search: FC = () => {
         {/* Header */}
         <Header isSearch={true} valueText={query} />
         <div className="border-b-2 mt-2"></div>
-        {/* Github repos main card detail. */}
-
-        <div className="mx-20 mt-4 space-y-4">
-          {results.map((result: ResultsInterface, index: number) => {
-            return <DisplayCard key={result.id} result={result} />;
-          })}
-        </div>
-        <div className="flex justify-center">
-          <h1 className="mx-auto text-md font-bold mt-2 cursor-pointer hover:underline">
-            See more...
+        <div className="mt-2 flex justify-start mx-24">
+          <h1 className="font-bold">
+            <span className="text-sm text-pink-500 font-bold mr-2">
+              Search results for :
+            </span>
+            {query}({pageCounter})
           </h1>
         </div>
+        {/* Github repos main card detail. */}
+        {load ? (
+          <div className="flex justify-center mt-8">
+            <ClipLoader />
+          </div>
+        ) : (
+          <div className="mx-20 mt-4 space-y-4">
+            {results.map((result: ResultsInterface, index: number) => {
+              return <DisplayCard key={result.id} result={result} />;
+            })}
+          </div>
+        )}
+        {/* see more */}
+        {results.length >= 5 && (
+          <div className="flex items-center justify-center mt-4 space-x-2 ">
+            {pageCounter > 1 && (
+              <h1
+                onClick={onPreviousPageHandler}
+                className="text-md font-bold  cursor-pointer hover:underline text-pink-500 "
+              >
+                Previous
+              </h1>
+            )}
+
+            <h1
+              onClick={onNextPageHandler}
+              className="text-md font-bold  cursor-pointer hover:underline text-purple-500 "
+            >
+              Next
+            </h1>
+          </div>
+        )}
+
+        {/* Error item */}
+        {error && (
+          <div className="flex justify-center shadow-md rounded-lg w-[400px] mx-auto p-10 hover:shadow-lg mt-10 items-center text-sm font-bold text-red-400 space-x-2 border-t-2">
+            <ExclamationCircleIcon className="h-10 mr-4" />
+            Some error occured. <br />
+            {errorMessage}
+          </div>
+        )}
+
+        {/* footer */}
         <div className="my-4">
           <Footer />
         </div>

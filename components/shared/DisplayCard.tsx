@@ -1,5 +1,10 @@
 import React, { FC } from "react";
-import { StarIcon, DuplicateIcon, ClockIcon } from "@heroicons/react/solid";
+import {
+  StarIcon,
+  DuplicateIcon,
+  ClockIcon,
+  DocumentAddIcon,
+} from "@heroicons/react/solid";
 import Moment from "react-moment";
 import Link from "next/link";
 import { CardProps } from "../../interfaces/interfaces";
@@ -20,22 +25,26 @@ const DisplayCard: FC<CardProps> = ({ result }) => {
     <div>
       <Link href={repoLink} passHref>
         <div className="shadow-sm border-2 rounded-lg p-4  hover:shadow-md">
-          <div className="flex items-center space-x-2">
-            <img
-              src={author.authorAvatar}
-              alt=""
-              className="h-14 rounded-full"
-            />
-            <div>
-              <a href={author.authorProfile} target="_blank" rel="noreferrer">
-                <h1 className="font-bold text-sm cursor-pointer  hover:underline opacity-50">
-                  {author.authorUname}
-                </h1>
-              </a>
+          <div className="flex justify-between items-center">
+            <div className="flex items-center space-x-2">
+              <img
+                src={author.authorAvatar}
+                alt=""
+                className="h-14 rounded-full"
+              />
+              <div>
+                <a href={author.authorProfile} target="_blank" rel="noreferrer">
+                  <h1 className="font-bold text-sm cursor-pointer  hover:underline opacity-50">
+                    {author.authorUname}
+                  </h1>
+                </a>
 
-              <p className="font-bold text-green-500">{language}</p>
+                <p className="font-bold text-green-500">{language}</p>
+              </div>
             </div>
+            <DocumentAddIcon className="h-6 text-rose-600 hover:text-fuchsia-600" />
           </div>
+
           <div className="text-sm font-bold opacity-40 flex items-center space-x-1 mt-2">
             <ClockIcon className="h-4" />
             <Moment fromNow>{createdAt}</Moment>

@@ -1,9 +1,9 @@
-import { SearchIcon, XIcon } from "@heroicons/react/solid";
+import { SearchIcon, MicrophoneIcon } from "@heroicons/react/solid";
 import React, { useState, FC, SyntheticEvent, FormEvent } from "react";
 import Router from "next/router";
 
 interface SearchBoxProps {
-  valueText: string | string[];
+  valueText?: string | string[];
 }
 
 const SearchBox: FC<SearchBoxProps> = ({ valueText }) => {
@@ -20,7 +20,6 @@ const SearchBox: FC<SearchBoxProps> = ({ valueText }) => {
 
   const onCrossHandler = (e) => {
     e.preventDefault();
-    setUserInput("");
   };
   return (
     <div className="pr-6 pl-3 py-2 rounded-3xl border-2 m-auto space-x-3 hover:shadow-md">
@@ -39,10 +38,9 @@ const SearchBox: FC<SearchBoxProps> = ({ valueText }) => {
             setUserInput(e.currentTarget.value);
           }}
         />
-        <XIcon
-          className="h-6 text-gray-300 hover:text-red-800"
-          onClick={onCrossHandler}
-        />
+        <div onClick={onCrossHandler}>
+          <MicrophoneIcon className="h-4 text-gray-300 hover:text-red-800" />
+        </div>
       </form>
     </div>
   );
