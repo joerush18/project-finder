@@ -104,7 +104,13 @@ const Search: FC = () => {
         ) : (
           <div className="mx-20 mt-4 space-y-4">
             {results.map((result: ResultsInterface, index: number) => {
-              return <DisplayCard key={result.id} result={result} />;
+              return (
+                <DisplayCard
+                  key={result.id}
+                  result={result}
+                  isBookmark={false}
+                />
+              );
             })}
           </div>
         )}

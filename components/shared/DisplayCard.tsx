@@ -4,12 +4,13 @@ import {
   DuplicateIcon,
   ClockIcon,
   DocumentAddIcon,
+  TrashIcon,
 } from "@heroicons/react/solid";
 import Moment from "react-moment";
 import Link from "next/link";
 import { CardProps } from "../../interfaces/interfaces";
 
-const DisplayCard: FC<CardProps> = ({ result }) => {
+const DisplayCard: FC<CardProps> = ({ result, isBookmark }) => {
   const {
     name,
     desc,
@@ -21,6 +22,27 @@ const DisplayCard: FC<CardProps> = ({ result }) => {
     author,
     topics,
   } = result;
+  // TODO: Remove the type issue errors
+  const addToLocalStorage = (e) => {
+    e.preventDefault();
+    var existing = localStorage.getItem("result");
+    if (existing == undefined) {
+      const arr = [result];
+      localStorage.setItem("result", [JSON.stringify(arr)]);
+    } else {
+      const arr = JSON.parse(existing);
+      arr.push(result);
+      localStorage.setItem("result", [JSON.stringify(arr)]);
+    }
+  };
+
+  // TODO: Make this function work
+
+  const removeFromlocalStorage = (e) => {
+    e.preventDefault();
+    alert("This feature will come soon.");
+  };
+
   return (
     <div>
       <Link href={repoLink} passHref>
@@ -42,7 +64,17 @@ const DisplayCard: FC<CardProps> = ({ result }) => {
                 <p className="font-bold text-green-500">{language}</p>
               </div>
             </div>
-            <DocumentAddIcon className="h-6 text-rose-600 hover:text-fuchsia-600" />
+            {isBookmark ? (
+              <TrashIcon
+                className="h-6 text-rose-600 hover:text-fuchsia-600"
+                onClick={removeFromlocalStorage}
+              />
+            ) : (
+              <DocumentAddIcon
+                className="h-6 text-green-600 hover:text-fuchsia-600"
+                onClick={addToLocalStorage}
+              />
+            )}
           </div>
 
           <div className="text-sm font-bold opacity-40 flex items-center space-x-1 mt-2">

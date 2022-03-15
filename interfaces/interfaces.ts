@@ -17,4 +17,5 @@ export interface ResultsInterface {
 
 export interface CardProps {
   result: ResultsInterface;
+  isBookmark: boolean;
 }
