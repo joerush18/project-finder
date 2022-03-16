@@ -1,10 +1,10 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import DisplayCard from "../components/shared/DisplayCard";
 import { ResultsInterface } from "../interfaces/interfaces";
 
-const bookmarks = () => {
+const Bookmarks = () => {
   const [bookmarks, setBookmarks] = useState([]);
   useEffect(() => {
     const result = localStorage.getItem("result");
@@ -47,4 +47,4 @@ const bookmarks = () => {
   );
 };
 
-export default bookmarks;
+export default Bookmarks;
