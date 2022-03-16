@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import DisplayCard from "../components/shared/DisplayCard";
 import { ResultsInterface } from "../interfaces/interfaces";
 
-const bookmarks: FC = () => {
+const bookmarks = () => {
   const [bookmarks, setBookmarks] = useState([]);
   useEffect(() => {
     const result = localStorage.getItem("result");
