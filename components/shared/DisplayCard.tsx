@@ -28,11 +28,11 @@ const DisplayCard: FC<CardProps> = ({ result, isBookmark }) => {
     var existing = localStorage.getItem("result");
     if (existing == undefined) {
       const arr = [result];
-      localStorage.setItem("result", [JSON.stringify(arr)]);
+      localStorage.setItem("result", [JSON.stringify(arr)].toString());
     } else {
       const arr = JSON.parse(existing);
       arr.push(result);
-      localStorage.setItem("result", [JSON.stringify(arr)]);
+      localStorage.setItem("result", [JSON.stringify(arr)].toString());
     }
   };
 
