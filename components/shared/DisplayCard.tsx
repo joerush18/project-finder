@@ -10,7 +10,12 @@ import Moment from "react-moment";
 import Link from "next/link";
 import { CardProps } from "../../interfaces/interfaces";
 
-const DisplayCard: FC<CardProps> = ({ result, isBookmark }) => {
+const DisplayCard: FC<CardProps> = ({
+  result,
+  isBookmark,
+  onDelete,
+  onAdd,
+}) => {
   const {
     name,
     desc,
@@ -22,26 +27,6 @@ const DisplayCard: FC<CardProps> = ({ result, isBookmark }) => {
     author,
     topics,
   } = result;
-  // TODO: Remove the type issue errors
-  const addToLocalStorage = (e) => {
-    e.preventDefault();
-    var existing = localStorage.getItem("result");
-    if (existing == undefined) {
-      const arr = [result];
-      localStorage.setItem("result", [JSON.stringify(arr)].toString());
-    } else {
-      const arr = JSON.parse(existing);
-      arr.push(result);
-      localStorage.setItem("result", [JSON.stringify(arr)].toString());
-    }
-  };
-
-  // TODO: Make this function work
-
-  const removeFromlocalStorage = (e) => {
-    e.preventDefault();
-    alert("This feature will come soon.");
-  };
 
   return (
     <div>
@@ -67,12 +52,12 @@ const DisplayCard: FC<CardProps> = ({ result, isBookmark }) => {
             {isBookmark ? (
               <TrashIcon
                 className="h-6 text-rose-600 hover:text-fuchsia-600"
-                onClick={removeFromlocalStorage}
+                onClick={onDelete}
               />
             ) : (
               <DocumentAddIcon
                 className="h-6 text-green-600 hover:text-fuchsia-600"
-                onClick={addToLocalStorage}
+                onClick={onAdd}
               />
             )}
           </div>

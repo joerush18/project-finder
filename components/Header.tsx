@@ -39,10 +39,11 @@ const Header: FC<HeaderProps> = ({ isSearch, valueText, bookmarksCount }) => {
         >
           <h1 className="hover:underline cursor-pointer">Github</h1>
         </a>
-
-        <button className="bg-backgroundDark px-5 py-2 text-white rounded-md">
-          Sign in
-        </button>
+        <Link href={"https://www.buymeacoffee.com/journeyto"}>
+          <div className=" text-white rounded-md hover:opacity-80">
+            <Image src={"/images/bmc-button.png"} height={30} width={100} />
+          </div>
+        </Link>
       </div>
     </div>
   );
