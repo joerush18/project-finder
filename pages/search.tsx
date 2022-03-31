@@ -8,6 +8,7 @@ import Footer from "../components/Footer";
 import { ResultsInterface } from "../interfaces/interfaces";
 import ClipLoader from "react-spinners/ClipLoader";
 import { ExclamationCircleIcon } from "@heroicons/react/solid";
+import toast from "react-hot-toast";
 
 type ResultsType = [ResultsInterface];
 
@@ -72,6 +73,31 @@ const Search: FC = () => {
     setPageCounter(pageCounter - 1);
   };
 
+  const addToLocalStorage = (e, item: ResultsInterface) => {
+    e.preventDefault();
+    var existing = localStorage.getItem("result");
+    if (existing == undefined) {
+      const arr = [item];
+      localStorage.setItem("result", [JSON.stringify(arr)].toString());
+    } else {
+      const arr = JSON.parse(existing);
+      const isExist = arr.some((val) => {
+        if (val.id === item.id) {
+          return true;
+        }
+      });
+      if (isExist) {
+        toast.error("Item already in bookmark !");
+      } else {
+        arr.push(item);
+        localStorage.setItem("result", [JSON.stringify(arr)].toString());
+        toast.success("Successfully added to bookmark !");
+      }
+    }
+  };
+
+  //  TODO: Implement change of icon for already bookmarked item
+
   useEffect(() => {
     fetchItems();
     setPageCounter(1);
@@ -95,7 +121,6 @@ const Search: FC = () => {
             </h1>
           </div>
         </div>
-
         {/* Github repos main card detail. */}
         {load ? (
           <div className="flex justify-center mt-8">
@@ -109,6 +134,8 @@ const Search: FC = () => {
                   key={result.id}
                   result={result}
                   isBookmark={false}
+                  onAdd={(e) => addToLocalStorage(e, result)}
+                  onDelete={undefined}
                 />
               );
             })}
